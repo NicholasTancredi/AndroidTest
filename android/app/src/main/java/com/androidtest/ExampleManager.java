@@ -3,10 +3,15 @@
 package com.androidtest;
 
 import android.util.Log;
-import android.graphics.Color;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.widget.RelativeLayout;
+
+import android.media.MediaExtractor;
+import android.media.MediaFormat;
+import android.media.MediaPlayer;
+import android.net.Uri;
+
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
@@ -16,6 +21,12 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
     RelativeLayout relativeLayout;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
+
+    MediaPlayer mediaPlayer;
+
+    String mediaPlayerFilepath;
+    Uri mediaPlayerUri;
+
     String exampleProp;
     public static final String REACT_CLASS = "Example";
 
@@ -34,20 +45,39 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
 
         surfaceView = new SurfaceView(context);
 
+        // NOTE: Java errors made me do this with "final"
+        final ThemedReactContext themedReactContext  = context;
+
         surfaceHolder = surfaceView.getHolder();
+
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
             @Override
-            public void surfaceCreated(SurfaceHolder holder) {
+            public void surfaceCreated(SurfaceHolder _surfaceHolder) {
                 Log.d("", "surfaceCreated");
+
+                mediaPlayerFilepath = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+                mediaPlayerUri = Uri.parse(mediaPlayerFilepath);
+
+                mediaPlayer = MediaPlayer.create(themedReactContext, mediaPlayerUri, _surfaceHolder);
+
+                if (mediaPlayer != null) {
+                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(final MediaPlayer _mediaPlayer) {
+                            Log.d("mediaPlayer", "onPrepared");
+                            _mediaPlayer.start();
+                        }
+                    });
+                }
             }
 
             @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            public void surfaceChanged(SurfaceHolder _surfaceHolder, int format, int width, int height) {
                 Log.d("", "surfaceChanged");
             }
 
             @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
+            public void surfaceDestroyed(SurfaceHolder _surfaceHolder) {
                 Log.d("", "surfaceDestroyed");
             }
         });
