@@ -6,10 +6,10 @@ import { requireNativeComponent } from 'react-native'
 const Example = requireNativeComponent('Example', null)
 
 export default class ExampleView extends Component {
-  state = { exampleProp: "GREEN"}
+  state = { exampleProp: "TEST MOUNTED"}
   componentDidMount() {
     setTimeout(() => {
-      this.setState({exampleProp: "BLUE"})
+      this.setState({exampleProp: "TEST componentDidMount"})
     }, 500)
   }
   render () {

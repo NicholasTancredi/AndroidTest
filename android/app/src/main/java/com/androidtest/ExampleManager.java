@@ -56,18 +56,18 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
 
         return relativeLayout;
     }
-    
+
     @Override
     protected void onAfterUpdateTransaction(RelativeLayout view) {
         super.onAfterUpdateTransaction(view);
         // NOTE: Props updated callback.
-        Log.d("onAfterUpdateTransaction", exampleProp);
+        Log.d("onAfterUpdate", exampleProp);
     }
 
     @ReactProp(name = "exampleProp")
     public void setExampleProp(RelativeLayout view, String prop) {
         exampleProp = prop;
-        
+
         Log.d("setExampleProp", prop);
         // Set properties from React onto your native component via a setter method
         // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
