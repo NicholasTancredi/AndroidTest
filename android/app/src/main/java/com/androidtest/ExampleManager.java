@@ -38,7 +38,7 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                // surfaceView.setBackgroundColor(Color.GREEN);
+                surfaceView.setBackgroundColor(Color.GREEN);
             }
 
             @Override
