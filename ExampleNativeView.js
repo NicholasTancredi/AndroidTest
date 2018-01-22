@@ -6,13 +6,20 @@ import { requireNativeComponent } from 'react-native'
 const Example = requireNativeComponent('Example', null)
 
 export default class ExampleView extends Component {
+  state = { exampleProp: "GREEN"}
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({exampleProp: "BLUE"})
+    }, 500)
+  }
   render () {
     return <Example 
-        style={{ flex: 1, backgroundColor: 'blue' }} 
+        exampleProp={this.state.exampleProp}
+        style={{ flex: 1, backgroundColor: 'orange' }} 
     />
   }
 }
 
 // ExampleView.propTypes = {
-//   exampleProp: React.PropTypes.any
+//   exampleProp: React.PropTypes.string
 // }

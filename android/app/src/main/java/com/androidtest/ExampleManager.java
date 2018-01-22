@@ -2,6 +2,7 @@
 
 package com.androidtest;
 
+import android.util.Log;
 import android.graphics.Color;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
@@ -15,6 +16,7 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
     RelativeLayout relativeLayout;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
+    String exampleProp;
     public static final String REACT_CLASS = "Example";
 
     @Override
@@ -32,21 +34,21 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
 
         surfaceView = new SurfaceView(context);
 
-        surfaceView.setBackgroundColor(Color.RED);
-
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                surfaceView.setBackgroundColor(Color.GREEN);
+                Log.d("", "surfaceCreated");
             }
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                Log.d("", "surfaceChanged");
             }
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+                Log.d("", "surfaceDestroyed");
             }
         });
 
@@ -54,9 +56,19 @@ public class ExampleManager extends SimpleViewManager<RelativeLayout> {
 
         return relativeLayout;
     }
+    
+    @Override
+    protected void onAfterUpdateTransaction(RelativeLayout view) {
+        super.onAfterUpdateTransaction(view);
+        // NOTE: Props updated callback.
+        Log.d("onAfterUpdateTransaction", exampleProp);
+    }
 
     @ReactProp(name = "exampleProp")
     public void setExampleProp(RelativeLayout view, String prop) {
+        exampleProp = prop;
+        
+        Log.d("setExampleProp", prop);
         // Set properties from React onto your native component via a setter method
         // https://facebook.github.io/react-native/docs/native-components-android.html#3-expose-view-property-setters-using-reactprop-or-reactpropgroup-annotation
     }
