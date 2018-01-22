@@ -1,6 +1,6 @@
 //  Created by react-native-create-bridge
 
-package com.androidtest.example;
+package com.androidtest;
 
 import android.support.annotation.Nullable;
 
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExampleModule extends ReactContextBaseJavaModule {
-    public static final String REACT_CLASS = "Example";
+    public static final String REACT_CLASS = "ExampleModule";
     private static ReactApplicationContext reactContext = null;
 
     public ExampleModule(ReactApplicationContext context) {

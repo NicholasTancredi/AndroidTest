@@ -1,6 +1,6 @@
 //  Created by react-native-create-bridge
 
-package com.androidtest.example;
+package com.androidtest;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -14,6 +14,15 @@ import java.util.List;
 
 public class ExamplePackage implements ReactPackage {
     @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        // Register your native component's view manager
+        // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
+        return Arrays.<ViewManager>asList(
+            new ExampleManager()
+        );
+    }
+
+    @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       // Register your native module
       // https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module
@@ -22,16 +31,8 @@ public class ExamplePackage implements ReactPackage {
       );
     }
 
-    @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
-
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        // Register your native component's view manager
-        // https://facebook.github.io/react-native/docs/native-components-android.html#4-register-the-viewmanager
-        return Arrays.<ViewManager>asList(
-            new ExampleManager()
-        );
-    }
+    
+    // public List<Class<? extends JavaScriptModule>> createJSModules() {
+    //     return Collections.emptyList();
+    // }
 }
