@@ -2,12 +2,12 @@
 
 import { NativeModules } from 'react-native'
 
-const { Example } = NativeModules
+const { ExampleModule } = NativeModules
 
 export default {
   exampleMethod () {
-    return Example.exampleMethod()
+    return ExampleModule.exampleMethod()
   },
 
-  EXAMPLE_CONSTANT: Example.EXAMPLE_CONSTANT
+  EXAMPLE_CONSTANT: ExampleModule.EXAMPLE_CONSTANT
 }
